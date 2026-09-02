@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portafolio de Servicios — UNAL Sede La Paz</title>
+<title>Portafolio de Servicios — UNAL Sede de La Paz</title>
 <style>
   :root{
-    --navy:#1F3864;
-    --navy-light:#2E4A7A;
-    --gold:#B08D57;
-    --gold-soft:#EDE3D2;
-    --paper:#FAF8F3;
+    --charcoal:#333333;
+    --purple:#7C2CB0;
+    --purple-dark:#6B2C8F;
+    --olive:#7C8B3D;
+    --blue:#4A7FB0;
+    --paper:#F7F7F5;
     --ink:#22252B;
-    --grey:#6B7280;
-    --line:#E1D9C8;
+    --text-grey:#6B6D70;
+    --line:#DDDCD8;
+    --tag-bg:#F1E6F7;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -26,19 +28,29 @@
   h1,h2,h3{
     font-family:Georgia,"Iowan Old Style","Palatino Linotype",serif;
     margin:0;
-    color:var(--navy);
+    color:var(--purple-dark);
     font-weight:600;
   }
 
   /* ---------- header ---------- */
   header{
-    background:var(--navy);
+    background:var(--charcoal);
     color:#fff;
     padding:34px 32px 28px;
-    border-bottom:4px solid var(--gold);
+    border-bottom:3px solid var(--olive);
+    position:relative;
+  }
+  header::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-3px;
+    height:3px;
+    background:var(--purple);
+    width:64px;
+    margin-left:32px;
   }
   header .eyebrow{
-    color:var(--gold);
+    color:#C9BEDD;
     font-size:13px;
     letter-spacing:.02em;
     margin:0 0 6px;
@@ -51,7 +63,7 @@
   }
   header p.sub{
     margin:10px 0 0;
-    color:#CBD4E5;
+    color:#D3D2CE;
     max-width:640px;
     font-size:15px;
   }
@@ -76,21 +88,21 @@
     max-width:420px;
     padding:10px 14px;
     border:1px solid var(--line);
-    border-radius:3px;
+    border-radius:2px;
     font-size:14px;
     background:#fff;
     color:var(--ink);
   }
   .search-row input[type=text]:focus{
     outline:none;
-    border-color:var(--navy);
+    border-color:var(--purple);
   }
   .count{
     font-size:14px;
-    color:var(--grey);
+    color:var(--text-grey);
   }
   .count strong{
-    color:var(--navy);
+    color:var(--purple-dark);
     font-family:Georgia,serif;
     font-size:20px;
     font-weight:700;
@@ -99,13 +111,44 @@
     margin-left:auto;
     background:none;
     border:1px solid var(--line);
-    color:var(--grey);
+    color:var(--text-grey);
     padding:8px 14px;
-    border-radius:3px;
+    border-radius:2px;
     font-size:13px;
     cursor:pointer;
   }
-  .clear-btn:hover{ border-color:var(--navy); color:var(--navy); }
+  .clear-btn:hover{ border-color:var(--purple); color:var(--purple-dark); }
+
+  .view-toggle{
+    display:flex;
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .view-btn{
+    background:#fff;
+    border:none;
+    color:var(--text-grey);
+    padding:8px 14px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .view-btn + .view-btn{ border-left:1px solid var(--line); }
+  .view-btn.active{
+    background:var(--purple);
+    color:#fff;
+  }
+  .external-banner{
+    display:none;
+    background:#F1E6F7;
+    color:#5A2E75;
+    font-size:12.5px;
+    padding:8px 32px;
+    margin:-18px -32px 14px;
+    border-bottom:1px solid var(--line);
+  }
+  body.external-mode .external-banner{ display:block; }
+  body.external-mode .fuente{ display:none; }
 
   .filter-groups{
     display:flex;
@@ -120,7 +163,7 @@
   }
   .filter-group .glabel{
     font-size:12px;
-    color:var(--grey);
+    color:var(--text-grey);
     min-width:88px;
     padding-top:7px;
     flex-shrink:0;
@@ -135,16 +178,16 @@
     background:#fff;
     color:var(--ink);
     padding:6px 12px;
-    border-radius:3px;
+    border-radius:2px;
     font-size:13px;
     cursor:pointer;
     user-select:none;
     transition:background .12s ease, color .12s ease, border-color .12s ease;
   }
-  .chip:hover{ border-color:var(--navy); }
+  .chip:hover{ border-color:var(--purple); }
   .chip.active{
-    background:var(--navy);
-    border-color:var(--navy);
+    background:var(--purple);
+    border-color:var(--purple);
     color:#fff;
   }
   .chip .dot{
@@ -165,8 +208,8 @@
   .card{
     background:#fff;
     border:1px solid var(--line);
-    border-left:4px solid var(--card-color, var(--gold));
-    border-radius:3px;
+    border-top:3px solid var(--card-color, var(--purple));
+    border-radius:2px;
     padding:16px 18px;
     display:flex;
     flex-direction:column;
@@ -174,13 +217,13 @@
   }
   .card .tema-label{
     font-size:11.5px;
-    color:var(--card-color, var(--gold));
+    color:var(--card-color, var(--purple));
     font-weight:600;
   }
   .card h3{
     font-size:16px;
     line-height:1.3;
-    color:var(--navy);
+    color:var(--ink);
   }
   .card .meta-row{
     display:flex;
@@ -189,49 +232,64 @@
     font-size:12px;
   }
   .tag{
-    background:var(--gold-soft);
-    color:#6b5730;
+    background:var(--tag-bg);
+    color:#5A2E75;
     padding:2px 8px;
-    border-radius:3px;
+    border-radius:2px;
     font-size:11.5px;
   }
-  .tag.lab{ background:#DDEAE9; color:#215352; }
-  .tag.estado{ background:#EFEFEF; color:#444; }
+  .tag.lab{ background:#E4EAF0; color:#2E4A63; }
+  .tag.area{ background:#EFECE3; color:#5C5346; }
+  .tag.estado{ background:#EFEFEF; color:#4A4A4A; }
   .card .entidad{
     font-size:13px;
-    color:var(--grey);
+    color:var(--text-grey);
   }
   .card .entidad b{ color:var(--ink); font-weight:600; }
+  .card .equipo{
+    font-size:12.5px;
+    color:var(--text-grey);
+    background:#F4F3EE;
+    border-left:2px solid var(--olive);
+    padding:4px 8px;
+  }
+  .card .equipo b{ color:var(--ink); font-weight:600; }
   .card .precio{
     font-size:14px;
     font-weight:700;
-    color:var(--navy);
+    color:var(--purple-dark);
     margin-top:auto;
     padding-top:6px;
     border-top:1px dashed var(--line);
   }
   .card .precio.na{
-    color:var(--grey);
+    color:var(--text-grey);
     font-weight:400;
     font-style:italic;
     font-size:12.5px;
   }
+  .card .precio-nota{
+    font-size:11px;
+    color:var(--text-grey);
+    font-style:italic;
+    margin-top:-4px;
+  }
   .card .fuente{
     font-size:11px;
-    color:#A9A297;
+    color:#A5A5A2;
   }
 
   .empty{
     padding:60px 20px;
     text-align:center;
-    color:var(--grey);
+    color:var(--text-grey);
   }
-  .empty h3{ color:var(--grey); margin-bottom:6px; }
+  .empty h3{ color:var(--text-grey); margin-bottom:6px; }
 
   footer{
     padding:20px 32px 40px;
     font-size:12px;
-    color:var(--grey);
+    color:var(--text-grey);
     border-top:1px solid var(--line);
   }
 
@@ -246,15 +304,20 @@
 <body>
 
 <header>
-  <p class="eyebrow">Universidad Nacional de Colombia — Sede La Paz</p>
+  <p class="eyebrow">Universidad Nacional de Colombia — Sede de La Paz</p>
   <h1>Portafolio de Servicios</h1>
   <p class="sub">Catálogo consolidado de servicios ofertables: laboratorios, consultoría, interventoría y más — filtrable por tema, laboratorio y programa académico.</p>
 </header>
 
 <div class="toolbar">
+  <div class="external-banner">Vista externa activa — apta para compartir con entidades externas. Los términos internos (calibración, confirmación de capacidad, etc.) están ocultos. <button id="backToInternal" style="border:none;background:none;color:#5A2E75;text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0;margin-left:6px;">Volver a vista interna</button></div>
   <div class="search-row">
     <input type="text" id="searchInput" placeholder="Buscar por nombre, entidad o palabra clave…">
     <span class="count"><strong id="countNum">0</strong> servicios</span>
+    <div class="view-toggle" id="viewToggle">
+      <button class="view-btn active" data-mode="internal">Vista interna</button>
+      <button class="view-btn" data-mode="external">Vista externa</button>
+    </div>
     <button class="clear-btn" id="clearBtn">Limpiar filtros</button>
   </div>
   <div class="filter-groups">
@@ -267,8 +330,16 @@
       <div class="chips" id="labChips"></div>
     </div>
     <div class="filter-group">
+      <span class="glabel">Área</span>
+      <div class="chips" id="areaChips"></div>
+    </div>
+    <div class="filter-group">
       <span class="glabel">Programa</span>
       <div class="chips" id="progChips"></div>
+    </div>
+    <div class="filter-group">
+      <span class="glabel">Disponibilidad</span>
+      <div class="chips" id="dispChips"></div>
     </div>
   </div>
 </div>
@@ -282,20 +353,44 @@
 </main>
 
 <footer>
-  Portafolio de Servicios · Dirección de Investigación y Extensión (DIE) · Universidad Nacional de Colombia, Sede La Paz
+  Portafolio de Servicios · Dirección de Investigación y Extensión (DIE) · Universidad Nacional de Colombia, Sede de La Paz
 </footer>
 
 <script>
 // ---- Reference metadata ----
 const TEMAS = {
-  "PS-01": { label: "Investigación aplicada y estudios técnicos", color: "#375A7F" },
-  "PS-02": { label: "Consultoría y asesoría técnica", color: "#B08D57" },
-  "PS-03": { label: "Extensión y asistencia técnica agropecuaria", color: "#4C7A50" },
-  "PS-04": { label: "Formación y capacitación", color: "#8B5E83" },
-  "PS-05": { label: "Servicios de laboratorio y análisis", color: "#2C7A7B" },
-  "PS-06": { label: "Innovación y transferencia tecnológica", color: "#A1522D" },
-  "PS-07": { label: "Interventoría y supervisión técnica", color: "#9C6B30" },
-  "PS-08": { label: "Acompañamiento comunitario y de gobernanza", color: "#6B4226" },
+  "PS-01": {
+    label: "Investigación aplicada y estudios técnicos",
+    color: "#4A7FB0"
+  },
+  "PS-02": {
+    label: "Consultoría y asesoría técnica",
+    color: "#7C2CB0"
+  },
+  "PS-03": {
+    label: "Extensión y asistencia técnica agropecuaria",
+    color: "#7C8B3D"
+  },
+  "PS-04": {
+    label: "Formación y capacitación",
+    color: "#5C5346"
+  },
+  "PS-05": {
+    label: "Servicios de laboratorio y análisis",
+    color: "#34495E"
+  },
+  "PS-06": {
+    label: "Innovación y transferencia tecnológica",
+    color: "#8A6D3B"
+  },
+  "PS-07": {
+    label: "Interventoría y supervisión técnica",
+    color: "#6B2C8F"
+  },
+  "PS-08": {
+    label: "Acompañamiento comunitario y de gobernanza",
+    color: "#556052"
+  }
 };
 
 const PROGRAMAS = {
@@ -304,136 +399,189 @@ const PROGRAMAS = {
   BIO: "Biología",
   EST: "Estadística",
   GEO: "Geografía",
-  GCC: "Gestión Cultural y Comunicativa",
+  GCC: "Gestión Cultural y Comunicativa"
 };
 
 const LABS = [
-  "Biología",
-  "Química",
-  "Suelos, Aguas y Foliares",
-  "Producción Sonora y Audiovisual",
+  "Propiedades Biológicas y Químicas",
+  "Ciencias de la Información Geográfica",
+  "Análisis y Visualización de Datos",
+  "Física y Prototipado",
+  "Comunicación Audiovisual",
   "Sin laboratorio requerido",
-  "Fuera de La Paz (referencia)",
+  "Fuera de la Sede de La Paz (referencia)"
 ];
+
+const DISPONIBILIDAD = ["Disponible en sede", "Apoyo con otra sede", "Proyectado en esta sede"];
 
 // ---- Service catalog ----
 const SERVICIOS = [
-  // ---------------- PS-02 Consultoría ----------------
-  { tema: "PS-02", nombre: "Formulación y ajuste de Planes de Gestión Ambiental Regional (PGAR)", entidad: "CORPOCESAR, CORPOGUAJIRA", programas: ["GEO", "BIOL"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Formulación de proyectos para el Sistema General de Regalías (SGR)", entidad: "Gobernaciones y alcaldías del Cesar y La Guajira", programas: ["GEO", "GCC", "EST"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Evaluación de programas de desarrollo rural", entidad: "Gobernación del Cesar, Gobernación de La Guajira, ART", programas: ["GEO", "GCC"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Asesoría en formulación de Catastro Multipropósito", entidad: "IGAC, municipios", programas: ["GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Evaluación de impacto socioambiental de proyectos energéticos/mineros", entidad: "ANLA, AES Colombia, Ecopetrol, GEB", programas: ["GEO", "BIOL"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Planeación territorial y conciliación de usos del suelo", entidad: "CORPOGUAJIRA, municipios (Curumaní, Chimichagua)", programas: ["GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-02", nombre: "Conceptos técnicos especializados", entidad: "Entidades judiciales o administrativas", programas: [], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Disponible ahora", fuente: "Acuerdo 011-2023, Art. 8" },
-
-  // ---------------- PS-07 Interventoría ----------------
-  { tema: "PS-07", nombre: "Interventoría técnica a obras de infraestructura vial terciaria", entidad: "INVÍAS, alcaldías municipales", programas: ["MEC", "GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-07", nombre: "Interventoría a proyectos de acueductos veredales financiados por SGR", entidad: "Gobernaciones, Fondo Adaptación", programas: ["BIOL", "GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-07", nombre: "Supervisión técnica de contratos de prestación de servicios ambientales", entidad: "CORPOCESAR, CORPOGUAJIRA", programas: ["BIOL", "GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-07", nombre: "Interventoría administrativa y financiera a convenios interinstitucionales", entidad: "ICBF, Minvivienda (Guajira Azul)", programas: ["GCC", "GEO"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", fuente: "Estrategia / Acuerdo 011-2023" },
-  { tema: "PS-07", nombre: "Interventoría a estudios y diseños de infraestructura educativa o social", entidad: "Alcaldías, Gobernación del Cesar", programas: ["GCC", "MEC"], laboratorio: "Sin laboratorio requerido", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", fuente: "Estrategia / Acuerdo 011-2023" },
-
-  // ---------------- PS-05 — Laboratorio de Biología ----------------
-  { tema: "PS-05", nombre: "PCR en tiempo real (qPCR, 96 pozos)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "PCR convencional (termociclador T100)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Electroforesis horizontal — análisis de ADN/ARN", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Electroforesis vertical — análisis de proteínas", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Documentación de imágenes de geles (fotodocumentador)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Ensayos ELISA / cuantificación colorimétrica (lector de microplacas)", entidad: "Salud, agroindustria, ambiente", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Lavado automatizado de microplacas (soporte a ELISA)", entidad: "Salud, agroindustria, ambiente", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Cuantificación y pureza de ADN/ARN/proteínas (Nanodrop)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Procesamiento de muestras sensibles a temperatura (microcentrífuga refrigerada)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Separación de componentes celulares (centrífuga refrigerada)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Manipulación segura de microorganismos (cabina de bioseguridad)", entidad: "Salud, investigación microbiológica", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Cultivo celular y microbiológico controlado (incubadora CO2)", entidad: "Salud, investigación microbiológica", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Esterilización de instrumental y medios (autoclave)", entidad: "Salud, investigación microbiológica", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Observación histológica y de tejidos (microscopio de luz transmitida)", entidad: "Salud, investigación biomédica", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Disección y taxonomía de organismos (estereomicroscopio)", entidad: "Investigación en biodiversidad", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Criopreservación de largo plazo (ultracongelador -80 °C)", entidad: "Bancos de muestras, investigación", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Pesaje de precisión analítica", entidad: "Todo tipo de análisis de laboratorio", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-
-  // ---------------- PS-05 — Laboratorio de Química ----------------
-  { tema: "PS-05", nombre: "Medición de pH, mV y temperatura", entidad: "Suelos, aguas, alimentos", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Medición simultánea de pH, conductividad y salinidad (multiparámetro)", entidad: "Calidad de agua/suelo", programas: ["BIOL", "BIO", "GEO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Análisis cuantitativo por absorbancia (UV-VIS)", entidad: "Análisis fisicoquímico general", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Cuantificación de metales por Absorción Atómica (AAS)", entidad: "Agua, suelo, alimentos", programas: ["BIOL", "BIO", "GEO"], laboratorio: "Química", precio: "$ 217.000/servicio (9 minerales)", estado: "Confirmar calibración", fuente: "Referencia SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Determinación de proteína/nitrógeno (sistema Kjeldahl)", entidad: "Alimentos, materiales biológicos", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Concentración de extractos por evaporación (rotavapor)", entidad: "Investigación en productos naturales", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Conservación de muestras por liofilización", entidad: "Bancos de muestras, agroindustria", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Extracción de compuestos por fluido supercrítico (CO2)", entidad: "Investigación en productos naturales", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: null, estado: "Confirmar calibración", fuente: "Ficha Lab. Biología y Química" },
-  { tema: "PS-05", nombre: "Contenido de sólidos solubles — °Brix (refractómetro)", entidad: "Agroindustria, frutas y bebidas", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: "$ 80.000/servicio (Índice de Refracción)", estado: "Disponible ahora", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-05", nombre: "Trituración y homogeneización de muestras (molino de laboratorio)", entidad: "Preparación de muestras para análisis", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: "$ 150.000/servicio (tamices 4–400)", estado: "Confirmar calibración", fuente: "Fac. Ingeniería, Sede Bogotá (Planta Piloto)" },
-  { tema: "PS-05", nombre: "Separación granulométrica de sólidos (tamizadora)", entidad: "Suelos, materiales, agroindustria", programas: ["BIOL", "BIO", "GEO"], laboratorio: "Química", precio: "$ 150.000/servicio (tamices 4–400)", estado: "Confirmar calibración", fuente: "Fac. Ingeniería, Sede Bogotá (Planta Piloto)" },
-  { tema: "PS-05", nombre: "Pesaje de precisión analítica (equipo compartido con Biología)", entidad: "Todo tipo de análisis de laboratorio", programas: ["BIOL", "BIO"], laboratorio: "Química", precio: "$ 62.500/medición", estado: "Confirmar calibración", fuente: "Fac. Ingeniería, Sede Bogotá (Metrología)" },
-
-  // ---------------- PS-04/PS-05 — Laboratorio de Producción Sonora y Audiovisual ----------------
-  { tema: "PS-04", nombre: "Capacitación e inducción en manejo de equipos audiovisuales y sonoros", entidad: "Estudiantes y docentes de la Sede", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: null, estado: "Disponible ahora", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-05", nombre: "Alquiler de cabinas de edición (postproducción de audio y video)", entidad: "Empresas, medios comunitarios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: "Tabla preliminar — pendiente ajuste (transferencia 25% + nuevos equipos)", estado: "Disponible ahora (precio en ajuste)", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-05", nombre: "Alquiler de la Sala de Producción Sonora (grabación no musical: voz, podcasts, radio)", entidad: "Empresas, medios comunitarios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: "Tabla preliminar — pendiente ajuste (transferencia 25% + nuevos equipos)", estado: "Disponible ahora (precio en ajuste)", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-05", nombre: "Alquiler del Estudio de Imagen y Televisión con equipos", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: null, estado: "No disponible — pendiente dotación tecnológica", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-05", nombre: "Edición de material audiovisual y sonoro externo", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: null, estado: "No disponible — pendiente definir vinculación de estudiante auxiliar", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-06", nombre: "Producción audiovisual y sonora integral (captura + edición)", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: null, estado: "No disponible — pendiente procedimiento de aseguramiento de equipos", fuente: "Respuesta del coordinador del laboratorio" },
-  { tema: "PS-05", nombre: "Préstamo de equipos audiovisuales y sonoros a usuarios externos", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Producción Sonora y Audiovisual", precio: null, estado: "No disponible — pendiente definir tipo de usuario autorizado", fuente: "Respuesta del coordinador del laboratorio" },
-
-  // ---------------- PS-03 — Postcosecha (Bogotá, ligado a reto San Juan) ----------------
-  { tema: "PS-03", nombre: "Caracterización morfológica de frutas (forma, tamaño, volumen, densidad, porosidad)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 316.800/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Densidad de frutas y hortalizas", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 63.400/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Porosidad de frutas y hortalizas", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 63.400/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Intensidad respiratoria postcosecha", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 136.800/punto", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Grado de madurez y variación de calidad por temperatura", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 520.000/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Sólidos solubles postcosecha — °Brix", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 50.000/servicio", estado: "Disponible ahora (Refractómetro)", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Acidez total titulable", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 40.000/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "pH postcosecha", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 40.000/servicio", estado: "Disponible ahora (pH-metro)", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Firmeza — textura instrumental", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 80.000/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Color — medición instrumental", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 60.000/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Contenido de humedad (secado en estufa)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 46.700/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-03", nombre: "Actividad de agua (medición directa)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL", "BIO"], laboratorio: "Biología", precio: "$ 43.400/servicio", estado: "Requiere equipo adicional", fuente: "Fac. Ingeniería, Sede Bogotá" },
-
-  // ---------------- PS-05 — Suelos, Aguas y Foliares (categorías) ----------------
-  { tema: "PS-05", nombre: "Análisis de suelos — Fertilidad / Salinidad (paquetes)", entidad: "Productores agrícolas, gobernaciones, CORPOCESAR/CORPOGUAJIRA", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis de suelos — determinaciones individuales (macro/micronutrientes)", entidad: "Productores agrícolas, gobernaciones", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis foliar completo", entidad: "Asociaciones de productores (café, frutales)", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis de aguas — consumo humano / domiciliario", entidad: "Municipios, JAC, acueductos veredales", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis de aguas — riego", entidad: "Productores agrícolas, distritos de riego", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis de aguas — residuales", entidad: "Municipios, industria local", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis de aguas — piscicultura", entidad: "Asociaciones de pescadores y piscicultores", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Análisis microbiológico (aguas, ambientes, manipuladores)", entidad: "Municipios, sector alimentario, salud pública", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-  { tema: "PS-05", nombre: "Estudio de recomendación e interpretación de resultados de suelos", entidad: "Productores agrícolas", programas: ["GEO", "BIOL"], laboratorio: "Suelos, Aguas y Foliares", precio: "$ 50.000/servicio (ref. Orinoquía)", estado: "Requiere confirmar capacidad instalada", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
-
-  // ---------------- Fuera de La Paz — referencia SISLAB Medellín ----------------
-  { tema: "PS-06", nombre: "Ensayo DSC — calorimetría diferencial de barrido", entidad: "Investigación en materiales y polímeros", programas: ["MEC", "BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 390.615/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-06", nombre: "Ensayo TGA — análisis termogravimétrico", entidad: "Investigación en materiales y polímeros", programas: ["MEC", "BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 346.154/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-06", nombre: "Ensayo simultáneo TGA/DSC", entidad: "Investigación en materiales y polímeros", programas: ["MEC", "BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 332.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Preparación de muestra para cromatografía líquida-masas", entidad: "Investigación bioquímica", programas: ["BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 160.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-01", nombre: "Procesamiento básico de datos e identificación preliminar de metabolitos", entidad: "Investigación bioquímica", programas: ["BIOL", "EST"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 350.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — por ATR", entidad: "Caracterización de materiales", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 174.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — por DRIFT", entidad: "Caracterización de materiales", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 224.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — Esfera de Integración", entidad: "Caracterización de materiales", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 174.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — Transmisión (pastilla KBr)", entidad: "Caracterización de materiales", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 327.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Inyección directa a Orbitrap (detector de masas)", entidad: "Investigación bioquímica avanzada", programas: ["BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 140.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-06", nombre: "Medición de poder calorífico", entidad: "Industria energética, biomasa", programas: ["MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 136.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Medición de densidad digital", entidad: "Control de calidad de líquidos/coloides", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 35.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-  { tema: "PS-05", nombre: "Hora de uso de equipos uHPLC/MS", entidad: "Investigación bioquímica avanzada", programas: ["BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 560.000/servicio", estado: "Gestionar por convenio — Sede Medellín", fuente: "SISLAB Medellín" },
-
-  // ---------------- Fuera de La Paz — referencia Ingeniería Química Bogotá ----------------
-  { tema: "PS-06", nombre: "Calorimetría Diferencial de Barrido de alta presión (HPDSC)", entidad: "Investigación en materiales avanzados", programas: ["MEC", "BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 400.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-05", nombre: "Espectro IR", entidad: "Caracterización de materiales", programas: ["BIOL", "MEC"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 180.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-01", nombre: "Carbono Orgánico Total — TOC (sólidos y líquidos)", entidad: "Investigación ambiental", programas: ["BIOL", "GEO"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 75.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", fuente: "Fac. Ingeniería, Sede Bogotá" },
-  { tema: "PS-05", nombre: "Determinación de color (materiales sólidos y líquidos)", entidad: "Control de calidad industrial", programas: ["BIOL"], laboratorio: "Fuera de La Paz (referencia)", precio: "$ 80.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-02", nombre: "Formulación y ajuste de Planes de Gestión Ambiental Regional (PGAR)", entidad: "CORPOCESAR, CORPOGUAJIRA", programas: ["GEO","BIOL"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Formulación de proyectos para el Sistema General de Regalías (SGR)", entidad: "Gobernaciones y alcaldías del Cesar y La Guajira", programas: ["GEO","GCC","EST"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Evaluación de programas de desarrollo rural", entidad: "Gobernación del Cesar, Gobernación de La Guajira, ART", programas: ["GEO","GCC"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Asesoría en formulación de Catastro Multipropósito", entidad: "IGAC, municipios", programas: ["GEO"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Evaluación de impacto socioambiental de proyectos energéticos/mineros", entidad: "ANLA, AES Colombia, Ecopetrol, GEB", programas: ["GEO","BIOL"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Planeación territorial y conciliación de usos del suelo", entidad: "CORPOGUAJIRA, municipios (Curumaní, Chimichagua)", programas: ["GEO"], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-02", nombre: "Conceptos técnicos especializados", entidad: "Entidades judiciales o administrativas", programas: [], laboratorio: "Sin laboratorio requerido", area: "Consultoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Acuerdo 011-2023, Art. 8" },
+  { tema: "PS-07", nombre: "Interventoría técnica a obras de infraestructura vial terciaria", entidad: "INVÍAS, alcaldías municipales", programas: ["MEC","GEO"], laboratorio: "Sin laboratorio requerido", area: "Interventoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-07", nombre: "Interventoría a proyectos de acueductos veredales financiados por SGR", entidad: "Gobernaciones, Fondo Adaptación", programas: ["BIOL","GEO"], laboratorio: "Sin laboratorio requerido", area: "Interventoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-07", nombre: "Supervisión técnica de contratos de prestación de servicios ambientales", entidad: "CORPOCESAR, CORPOGUAJIRA", programas: ["BIOL","GEO"], laboratorio: "Sin laboratorio requerido", area: "Interventoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-07", nombre: "Interventoría administrativa y financiera a convenios interinstitucionales", entidad: "ICBF, Minvivienda (Guajira Azul)", programas: ["GCC","GEO"], laboratorio: "Sin laboratorio requerido", area: "Interventoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-07", nombre: "Interventoría a estudios y diseños de infraestructura educativa o social", entidad: "Alcaldías, Gobernación del Cesar", programas: ["GCC","MEC"], laboratorio: "Sin laboratorio requerido", area: "Interventoría", equipo: "No aplica — servicio de asesoría o supervisión, no requiere equipo", precio: null, estado: "Requiere perfil docente idóneo (Art. 35)", disponibilidad: "Disponible en sede", fuente: "Estrategia / Acuerdo 011-2023" },
+  { tema: "PS-05", nombre: "PCR en tiempo real (qPCR, 96 pozos)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Termociclador en tiempo real (qPCR, 96 pozos)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "PCR convencional (termociclador T100)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Termociclador T100", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Electroforesis horizontal — análisis de ADN/ARN", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Sistema de electroforesis horizontal + fuente de poder", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Electroforesis vertical — análisis de proteínas", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Sistema de electroforesis vertical (hasta 4 geles)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Documentación de imágenes de geles (fotodocumentador)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Sistema de documentación de imágenes (fotodocumentador)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Ensayos ELISA / cuantificación colorimétrica (lector de microplacas)", entidad: "Salud, agroindustria, ambiente", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Lector de absorbancia de microplacas (415–750 nm)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Lavado automatizado de microplacas (soporte a ELISA)", entidad: "Salud, agroindustria, ambiente", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Lavador de microplacas", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Cuantificación y pureza de ADN/ARN/proteínas (Nanodrop)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Nanodrop / espectrofotómetro de microvolumen", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Procesamiento de muestras sensibles a temperatura (microcentrífuga refrigerada)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Microcentrífuga refrigerada (-9 a 40 °C)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Separación de componentes celulares (centrífuga refrigerada)", entidad: "Investigación biomédica y ambiental", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Centrífuga refrigerada", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Manipulación segura de microorganismos (cabina de bioseguridad)", entidad: "Salud, investigación microbiológica", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Cabina de bioseguridad", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Cultivo celular y microbiológico controlado (incubadora CO2)", entidad: "Salud, investigación microbiológica", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Incubadora CO2", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Esterilización de instrumental y medios (autoclave)", entidad: "Salud, investigación microbiológica", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Autoclave", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Observación histológica y de tejidos (microscopio de luz transmitida)", entidad: "Salud, investigación biomédica", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Microscopio binocular de luz transmitida (contraste de fases)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Disección y taxonomía de organismos (estereomicroscopio)", entidad: "Investigación en biodiversidad", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Estereomicroscopio (con cámara integrada / WiFi)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Criopreservación de largo plazo (ultracongelador -80 °C)", entidad: "Bancos de muestras, investigación", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Ultracongelador (-80 a -86 °C)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Pesaje de precisión analítica", entidad: "Todo tipo de análisis de laboratorio", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Balanza analítica (220 g / 0,1 mg)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Medición de pH, mV y temperatura", entidad: "Suelos, aguas, alimentos", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "pH-metro de mesa", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Medición simultánea de pH, conductividad y salinidad (multiparámetro)", entidad: "Calidad de agua/suelo", programas: ["BIOL","BIO","GEO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Multiparámetro", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Análisis cuantitativo por absorbancia (UV-VIS)", entidad: "Análisis fisicoquímico general", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Espectrofotómetro UV-VIS (190–1100 nm)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Cuantificación de metales por Absorción Atómica (AAS)", entidad: "Agua, suelo, alimentos", programas: ["BIOL","BIO","GEO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Espectrofotómetro de Absorción Atómica (AAS)", precio: "$ 217.000/servicio (9 minerales)", estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Referencia SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Determinación de proteína/nitrógeno (sistema Kjeldahl)", entidad: "Alimentos, materiales biológicos", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Sistema Kjeldahl (Destilador–Digestor–Scrubber)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Concentración de extractos por evaporación (rotavapor)", entidad: "Investigación en productos naturales", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Rotavapor", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Conservación de muestras por liofilización", entidad: "Bancos de muestras, agroindustria", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Liofilizador", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Extracción de compuestos por fluido supercrítico (CO2)", entidad: "Investigación en productos naturales", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Equipo de extracción por fluido supercrítico (CO2)", precio: null, estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Ficha Lab. Biología y Química" },
+  { tema: "PS-05", nombre: "Contenido de sólidos solubles — °Brix (refractómetro)", entidad: "Agroindustria, frutas y bebidas", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Refractómetro (°Brix)", precio: "$ 80.000/servicio (Índice de Refracción)", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-05", nombre: "Trituración y homogeneización de muestras (molino de laboratorio)", entidad: "Preparación de muestras para análisis", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Molino de laboratorio", precio: "$ 150.000/servicio (tamices 4–400)", estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá (Planta Piloto)" },
+  { tema: "PS-05", nombre: "Separación granulométrica de sólidos (tamizadora)", entidad: "Suelos, materiales, agroindustria", programas: ["BIOL","BIO","GEO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Tamizadora", precio: "$ 150.000/servicio (tamices 4–400)", estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá (Planta Piloto)" },
+  { tema: "PS-05", nombre: "Pesaje de precisión analítica (equipo compartido con Biología)", entidad: "Todo tipo de análisis de laboratorio", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Química", equipo: "Balanza analítica (220 g / 0,1 mg)", precio: "$ 62.500/medición", estado: "Confirmar calibración", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá (Metrología)" },
+  { tema: "PS-04", nombre: "Capacitación e inducción en manejo de equipos audiovisuales y sonoros", entidad: "Estudiantes y docentes de la Sede", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Formación y Capacitación", equipo: "Equipos de la Sala de Producción Sonora y cabinas de edición", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Alquiler de cabinas de edición (postproducción de audio y video)", entidad: "Empresas, medios comunitarios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Edición y Postproducción", equipo: "Cabinas de edición (equipos de cómputo + software profesional)", precio: "Tabla preliminar — pendiente ajuste (transferencia 25% + nuevos equipos)", estado: "Disponible ahora (precio en ajuste)", disponibilidad: "Disponible en sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Alquiler de la Sala de Producción Sonora (grabación no musical: voz, podcasts, radio)", entidad: "Empresas, medios comunitarios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Producción y Grabación", equipo: "Sala de Producción Sonora (equipamiento base de grabación)", precio: "Tabla preliminar — pendiente ajuste (transferencia 25% + nuevos equipos)", estado: "Disponible ahora (precio en ajuste)", disponibilidad: "Disponible en sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Alquiler del Estudio de Imagen y Televisión con equipos", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Producción y Grabación", equipo: "Estudio de Imagen y TV — dotación pendiente (luces, cámaras, consolas)", precio: null, estado: "No disponible — pendiente dotación tecnológica", disponibilidad: "Proyectado en esta sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Edición de material audiovisual y sonoro externo", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Edición y Postproducción", equipo: "Cabinas de edición", precio: null, estado: "No disponible — pendiente definir vinculación de estudiante auxiliar", disponibilidad: "Proyectado en esta sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-06", nombre: "Producción audiovisual y sonora integral (captura + edición)", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Producción y Grabación", equipo: "Equipos de captura y edición del laboratorio", precio: null, estado: "No disponible — pendiente procedimiento de aseguramiento de equipos", disponibilidad: "Proyectado en esta sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Préstamo de equipos audiovisuales y sonoros a usuarios externos", entidad: "Empresas, medios, entidades culturales", programas: ["GCC"], laboratorio: "Comunicación Audiovisual", area: "Producción y Grabación", equipo: "Equipos audiovisuales/sonoros del laboratorio (por definir cuáles)", precio: null, estado: "No disponible — pendiente definir tipo de usuario autorizado", disponibilidad: "Proyectado en esta sede", fuente: "Respuesta del coordinador del laboratorio" },
+  { tema: "PS-05", nombre: "Diseño 3D (modelado y preparación de archivo para impresión)", entidad: "Talleres, emprendimientos, sector productivo regional, otros programas académicos", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Diseño, Impresión y Manufactura Digital", equipo: "Impresoras 3D (2 unidades) — estación de diseño previo", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Impresión 3D — Resina (SLA)", entidad: "Talleres, emprendimientos, sector productivo regional", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Diseño, Impresión y Manufactura Digital", equipo: "Impresora 3D (tecnología SLA)", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Impresión 3D — Filamento (FDM, ABS/PETG/PLA)", entidad: "Talleres, emprendimientos, sector productivo regional", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Diseño, Impresión y Manufactura Digital", equipo: "Impresora 3D (tecnología FDM)", precio: null, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Difracción de rayos X (XRD) — estructura cristalina", entidad: "Minería, metalurgia, investigación en materiales", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Por adquirir — proyectado próximo año", precio: null, estado: "No disponible — equipo aún no instalado", disponibilidad: "Proyectado en esta sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Metalografía", entidad: "Sector metalmecánico, control de calidad industrial", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Por adquirir — proyectado próximo año", precio: null, estado: "No disponible — equipo aún no instalado", disponibilidad: "Proyectado en esta sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Microdureza", entidad: "Control de calidad de materiales, tratamientos térmicos", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Por adquirir — proyectado próximo año", precio: null, estado: "No disponible — equipo aún no instalado", disponibilidad: "Proyectado en esta sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-06", nombre: "Microscopía electrónica", entidad: "Investigación en materiales, análisis de fallas", programas: ["MEC","BIOL"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Por adquirir — proyectado próximo año (probable SEM)", precio: null, estado: "No disponible — equipo aún no instalado", disponibilidad: "Proyectado en esta sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-05", nombre: "Análisis de composición elemental", entidad: "Control de calidad, industria minero-energética", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Por adquirir — proyectado próximo año", precio: null, estado: "No disponible — equipo aún no instalado", disponibilidad: "Proyectado en esta sede", fuente: "Levantamiento en campo — Laboratorio de Física" },
+  { tema: "PS-03", nombre: "Caracterización morfológica de frutas (forma, tamaño, volumen, densidad, porosidad)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Equipo de caracterización morfológica (referencia Bogotá)", precio: "$ 316.800/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Densidad de frutas y hortalizas", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Picnómetro / balanza de precisión (referencia Bogotá)", precio: "$ 63.400/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Porosidad de frutas y hortalizas", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Equipo de medición de porosidad (referencia Bogotá)", precio: "$ 63.400/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Intensidad respiratoria postcosecha", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Analizador de intensidad respiratoria (referencia Bogotá)", precio: "$ 136.800/punto", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Grado de madurez y variación de calidad por temperatura", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Cámaras de temperatura controlada (referencia Bogotá)", precio: "$ 520.000/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Sólidos solubles postcosecha — °Brix", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Refractómetro (disponible en La Paz)", precio: "$ 50.000/servicio", estado: "Disponible ahora (Refractómetro)", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Acidez total titulable", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Equipo de titulación (referencia Bogotá)", precio: "$ 40.000/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "pH postcosecha", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "pH-metro (disponible en La Paz)", precio: "$ 40.000/servicio", estado: "Disponible ahora (pH-metro)", disponibilidad: "Disponible en sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Firmeza — textura instrumental", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Texturómetro (referencia Bogotá)", precio: "$ 80.000/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Color — medición instrumental", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Colorímetro (referencia Bogotá)", precio: "$ 60.000/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Contenido de humedad (secado en estufa)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Estufa de secado (referencia Bogotá)", precio: "$ 46.700/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-03", nombre: "Actividad de agua (medición directa)", entidad: "Asociación de Productores de Frutas, San Juan (La Minda)", programas: ["BIOL","BIO"], laboratorio: "Propiedades Biológicas y Químicas", area: "Biología", equipo: "Medidor de actividad de agua (referencia Bogotá)", precio: "$ 43.400/servicio", estado: "Requiere equipo adicional", disponibilidad: "Proyectado en esta sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-05", nombre: "Análisis de suelos — Fertilidad / Salinidad (paquetes)", entidad: "Productores agrícolas, gobernaciones, CORPOCESAR/CORPOGUAJIRA", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis de suelos — determinaciones individuales (macro/micronutrientes)", entidad: "Productores agrícolas, gobernaciones", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis foliar completo", entidad: "Asociaciones de productores (café, frutales)", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis de aguas — consumo humano / domiciliario", entidad: "Municipios, JAC, acueductos veredales", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis de aguas — riego", entidad: "Productores agrícolas, distritos de riego", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis de aguas — residuales", entidad: "Municipios, industria local", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis de aguas — piscicultura", entidad: "Asociaciones de pescadores y piscicultores", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Análisis microbiológico (aguas, ambientes, manipuladores)", entidad: "Municipios, sector alimentario, salud pública", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "Ver hoja de referencia", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-05", nombre: "Estudio de recomendación e interpretación de resultados de suelos", entidad: "Productores agrícolas", programas: ["GEO","BIOL"], laboratorio: "Propiedades Biológicas y Químicas", area: "Suelos, Aguas y Foliares", equipo: "Por confirmar (capacidad instalada aún no verificada en La Paz)", precio: "$ 50.000/servicio (ref. Orinoquía)", estado: "Requiere confirmar capacidad instalada", disponibilidad: "Proyectado en esta sede", fuente: "Ref. Precios Suelos-Aguas-Foliares" },
+  { tema: "PS-06", nombre: "Ensayo DSC — calorimetría diferencial de barrido", entidad: "Investigación en materiales y polímeros", programas: ["MEC","BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Calorímetro Diferencial de Barrido (DSC)", precio: "$ 390.615/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-06", nombre: "Ensayo TGA — análisis termogravimétrico", entidad: "Investigación en materiales y polímeros", programas: ["MEC","BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Analizador Termogravimétrico (TGA)", precio: "$ 346.154/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-06", nombre: "Ensayo simultáneo TGA/DSC", entidad: "Investigación en materiales y polímeros", programas: ["MEC","BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Equipo TGA/DSC simultáneo", precio: "$ 332.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Preparación de muestra para cromatografía líquida-masas", entidad: "Investigación bioquímica", programas: ["BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Estación de preparación de muestras LC-MS", precio: "$ 160.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-01", nombre: "Procesamiento básico de datos e identificación preliminar de metabolitos", entidad: "Investigación bioquímica", programas: ["BIOL","EST"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Software de procesamiento metabolómico", precio: "$ 350.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — por ATR", entidad: "Caracterización de materiales", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Espectrómetro FTIR (accesorio ATR)", precio: "$ 174.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — por DRIFT", entidad: "Caracterización de materiales", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Espectrómetro FTIR (accesorio DRIFT)", precio: "$ 224.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — Esfera de Integración", entidad: "Caracterización de materiales", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Espectrómetro FTIR (esfera de integración)", precio: "$ 174.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Espectroscopía infrarrojo FTIR — Transmisión (pastilla KBr)", entidad: "Caracterización de materiales", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Espectrómetro FTIR (transmisión, pastilla KBr)", precio: "$ 327.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Inyección directa a Orbitrap (detector de masas)", entidad: "Investigación bioquímica avanzada", programas: ["BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Espectrómetro de masas Orbitrap", precio: "$ 140.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-06", nombre: "Medición de poder calorífico", entidad: "Industria energética, biomasa", programas: ["MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Bomba calorimétrica", precio: "$ 136.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Medición de densidad digital", entidad: "Control de calidad de líquidos/coloides", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Densímetro digital", precio: "$ 35.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-05", nombre: "Hora de uso de equipos uHPLC/MS", entidad: "Investigación bioquímica avanzada", programas: ["BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia SISLAB Medellín", equipo: "Cromatógrafo uHPLC acoplado a espectrómetro de masas", precio: "$ 560.000/servicio", estado: "Gestionar por convenio — Sede Medellín", disponibilidad: "Apoyo con otra sede", fuente: "SISLAB Medellín" },
+  { tema: "PS-06", nombre: "Calorimetría Diferencial de Barrido de alta presión (HPDSC)", entidad: "Investigación en materiales avanzados", programas: ["MEC","BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia Fac. Ingeniería Bogotá", equipo: "Calorímetro Diferencial de Barrido de Alta Presión (HPDSC)", precio: "$ 400.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", disponibilidad: "Apoyo con otra sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-05", nombre: "Espectro IR", entidad: "Caracterización de materiales", programas: ["BIOL","MEC"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia Fac. Ingeniería Bogotá", equipo: "Espectrómetro Infrarrojo (IR)", precio: "$ 180.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", disponibilidad: "Apoyo con otra sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-01", nombre: "Carbono Orgánico Total — TOC (sólidos y líquidos)", entidad: "Investigación ambiental", programas: ["BIOL","GEO"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia Fac. Ingeniería Bogotá", equipo: "Analizador de Carbono Orgánico Total (TOC)", precio: "$ 75.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", disponibilidad: "Apoyo con otra sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-05", nombre: "Determinación de color (materiales sólidos y líquidos)", entidad: "Control de calidad industrial", programas: ["BIOL"], laboratorio: "Fuera de la Sede de La Paz (referencia)", area: "Referencia Fac. Ingeniería Bogotá", equipo: "Colorímetro / espectrofotómetro de color", precio: "$ 80.000/servicio", estado: "Gestionar por convenio — Sede Bogotá", disponibilidad: "Apoyo con otra sede", fuente: "Fac. Ingeniería, Sede Bogotá" },
+  { tema: "PS-05", nombre: "Corte y grabado láser de precisión", entidad: "Talleres, emprendimientos, sector productivo regional, diseño y señalética", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Diseño, Impresión y Manufactura Digital", equipo: "Máquina de corte y grabado láser", precio: null, estado: "Equipo presente — servicio de extensión por definir con el profesor", disponibilidad: "Disponible en sede", fuente: "Inventario oficial — Laboratorio de Física y Prototipado (coord. Leonardo Velasco Estrada)" },
+  { tema: "PS-05", nombre: "Mecanizado sustractivo con ruteadora CNC", entidad: "Talleres, emprendimientos, sector productivo regional", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Diseño, Impresión y Manufactura Digital", equipo: "Ruteadora CNC", precio: null, estado: "Equipo presente — servicio de extensión por definir con el profesor", disponibilidad: "Disponible en sede", fuente: "Inventario oficial — Laboratorio de Física y Prototipado (coord. Leonardo Velasco Estrada)" },
+  { tema: "PS-05", nombre: "Recubrimientos por spin coating (películas delgadas, dispersión de nanopartículas)", entidad: "Investigación en materiales, nanotecnología", programas: ["MEC","BIOL"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Spin coater", precio: null, estado: "Equipo presente — servicio de extensión por definir con el profesor", disponibilidad: "Disponible en sede", fuente: "Inventario oficial — Laboratorio de Física y Prototipado (coord. Leonardo Velasco Estrada)" },
+  { tema: "PS-05", nombre: "Caracterización eléctrica de materiales y circuitos (impedancímetro)", entidad: "Investigación en electrónica y materiales, sector energético", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Caracterización de Materiales y Electrónica", equipo: "Impedancímetro", precio: null, estado: "Equipo presente — servicio de extensión por definir con el profesor", disponibilidad: "Disponible en sede", fuente: "Inventario oficial — Laboratorio de Física y Prototipado (coord. Leonardo Velasco Estrada)" },
+  { tema: "PS-04", nombre: "Capacitación en electroneumática y neumática industrial", entidad: "SENA, empresas del sector industrial, formación técnica", programas: ["MEC"], laboratorio: "Física y Prototipado", area: "Formación Técnica", equipo: "Banco de entrenamiento de electroneumática y neumática", precio: null, estado: "Equipo presente — servicio de extensión por definir con el profesor", disponibilidad: "Disponible en sede", fuente: "Inventario oficial — Laboratorio de Física y Prototipado (coord. Leonardo Velasco Estrada)" },
+  { tema: "PS-05", nombre: "Alquiler de Sala para Conferencias (máx. 29 personas)", entidad: "Estudiantes, docentes, empresas y entidades externas (eventos, capacitaciones)", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Sala de conferencias equipada (video beam/pantalla, cómputo)", precio: {"interna":"$ 146.406","externa":"$ 175.687"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Alquiler de Sala Office (máx. 15 personas)", entidad: "Estudiantes, docentes, empresas y entidades externas", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Sala tipo office equipada con computadores", precio: {"interna":"$ 177.513","externa":"$ 213.016"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Alquiler de Sala ArcGIS (máx. 15 personas)", entidad: "Estudiantes, docentes, empresas y entidades externas que requieran análisis SIG", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Sala equipada con software ArcGIS", precio: {"interna":"$ 180.208","externa":"$ 216.249"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Alquiler de Sala ERDAS (máx. 15 personas)", entidad: "Estudiantes, docentes, empresas y entidades externas que requieran procesamiento de imágenes satelitales", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Sala equipada con software ERDAS (percepción remota)", precio: {"interna":"$ 396.748","externa":"$ 476.098"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Alquiler de Sala ERDAS y ArcGIS (máx. 15 personas)", entidad: "Estudiantes, docentes, empresas y entidades externas que requieran ambos software", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Sala equipada con software ERDAS + ArcGIS", precio: {"interna":"$ 411.116","externa":"$ 493.340"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Impresión en plotter (gran formato)", entidad: "Investigadores, estudiantes, entidades que requieran impresión de mapas o planos", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Salas y Software SIG", equipo: "Plotter HP (impresora de gran formato)", precio: "Cotizar según configuración del documento a imprimir", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — fotografía (medio día)", entidad: "Entidades públicas/privadas, medios, sector inmobiliario y de construcción", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 661.976","externa":"$ 794.371","nota":"+ transporte al sitio (piloto y observador)"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — video aéreo básico (medio día)", entidad: "Entidades públicas/privadas, medios, comunicaciones institucionales", programas: ["GEO","GCC"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 794.371","externa":"$ 953.246","nota":"+ transporte al sitio (piloto y observador)"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — video cinematográfico (seguimiento de personas, vehículos o recorridos)", entidad: "Medios, comunicaciones institucionales, eventos", programas: ["GEO","GCC"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 860.569","externa":"$ 1.032.683","nota":"+ transporte al sitio (piloto y observador)"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — inspección visual de cubierta", entidad: "Administración de infraestructura, mantenimiento de edificaciones", programas: ["GEO","MEC"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 926.766","externa":"$ 1.112.120","nota":"+ transporte al sitio (piloto y observador)"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — registro de eventos o actividades institucionales", entidad: "Dependencias UNAL, entidades aliadas, eventos institucionales", programas: ["GEO","GCC"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 992.964","externa":"$ 1.191.557","nota":"+ transporte al sitio (piloto y observador)"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Toma aérea con dron — fotogrametría para ortomosaicos y levantamiento topográfico", entidad: "CORPOCESAR, CORPOGUAJIRA, IGAC, municipios, sector agropecuario", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Dron y Fotogrametría", equipo: "Dron con cámara (equipo de captura aérea)", precio: {"interna":"$ 1.059.162","externa":"$ 1.270.994","nota":"+ transporte; puede variar según área de operación"}, estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-02", nombre: "Levantamiento georreferenciado con equipos GPS", entidad: "CORPOCESAR, CORPOGUAJIRA, IGAC, municipios, sector agropecuario, investigación territorial", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Consultoría SIG", equipo: "Equipos GPS geodésicos", precio: "Cotizar según tipo de equipo, área del levantamiento y software usado", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-02", nombre: "Levantamiento georreferenciado con equipo + procesamiento en software SIG", entidad: "CORPOCESAR, CORPOGUAJIRA, IGAC, municipios, sector agropecuario", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Consultoría SIG", equipo: "Equipos GPS geodésicos + software SIG (ArcGIS/ERDAS)", precio: "Cotizar según tipo de equipo, área del levantamiento y software usado", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-02", nombre: "Elaboración de cartografía digital", entidad: "Municipios, gobernaciones, entidades de planeación territorial", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Consultoría SIG", equipo: "Software SIG (ArcGIS/ERDAS)", precio: "Cotizar según tipo de cartografía a realizar", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-02", nombre: "Elaboración de cartografía digital + impresión en gran formato", entidad: "Municipios, gobernaciones, entidades de planeación territorial", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Consultoría SIG", equipo: "Software SIG (ArcGIS/ERDAS) + Plotter", precio: "Cotizar según tipo de cartografía y configuración de impresión", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-02", nombre: "Procesamiento de imágenes de dron para fotogrametría y levantamiento topográfico", entidad: "CORPOCESAR, CORPOGUAJIRA, IGAC, sector agropecuario, obras de infraestructura", programas: ["GEO"], laboratorio: "Ciencias de la Información Geográfica", area: "Consultoría SIG", equipo: "Dron + software de fotogrametría", precio: "Cotizar según volumen de datos y software utilizado", estado: "Disponible ahora", disponibilidad: "Disponible en sede", fuente: "Brochure de Servicios — Laboratorio de Geografía y Geomática" },
+  { tema: "PS-05", nombre: "Servicios del laboratorio — por definir", entidad: "Por definir según líneas de servicio futuras", programas: ["EST"], laboratorio: "Análisis y Visualización de Datos", area: "Por definir", equipo: "Por confirmar con el responsable del laboratorio", precio: null, estado: "Laboratorio en caracterización — aún sin inventario de equipos ni servicios definidos", disponibilidad: "Proyectado en esta sede", fuente: "Listado oficial de laboratorios de la Sede de La Paz" },
 ];
 
 // ---- state ----
-const state = { tema: new Set(), lab: new Set(), prog: new Set(), q: "" };
+const state = { tema: new Set(), lab: new Set(), area: new Set(), prog: new Set(), disp: new Set(), q: "", mode: "internal" };
 
 const LAB_COLOR = {
-  "Biología": "#2C7A7B",
-  "Química": "#2C7A7B",
-  "Suelos, Aguas y Foliares": "#4C7A50",
-  "Producción Sonora y Audiovisual": "#8B5E83",
-  "Sin laboratorio requerido": "#B08D57",
-  "Fuera de La Paz (referencia)": "#8A8578",
+  "Propiedades Biológicas y Químicas": "#34495E",
+  "Ciencias de la Información Geográfica": "#4A7FB0",
+  "Análisis y Visualización de Datos": "#5C5346",
+  "Física y Prototipado": "#8A6D3B",
+  "Comunicación Audiovisual": "#6B2C8F",
+  "Sin laboratorio requerido": "#7C2CB0",
+  "Fuera de la Sede de La Paz (referencia)": "#8A8A8A",
 };
+
+const DISP_COLOR = {
+  "Disponible en sede": "#7C8B3D",
+  "Apoyo con otra sede": "#8A8A8A",
+  "Proyectado en esta sede": "#B0791A",
+};
+
+// ---- public-facing (external) text mapping ----
+const DISP_PUBLIC = {
+  "Disponible en sede": "Disponible",
+  "Apoyo con otra sede": "Disponible por convenio UNAL",
+  "Proyectado en esta sede": "Próximamente",
+};
+
+function publicEstado(estado){
+  if (/^Disponible ahora/.test(estado)) return estado; // positive, safe to show
+  if (/^Gestionar por convenio — (.+)$/.test(estado)) {
+    const m = estado.match(/^Gestionar por convenio — (.+)$/);
+    return "Disponible mediante convenio — " + m[1];
+  }
+  return null; // hide internal working notes
+}
+
+function publicEquipo(equipo){
+  if (/^Por adquirir/.test(equipo)) return "Equipamiento en proceso de adquisición";
+  if (/^Por confirmar \(capacidad instalada/.test(equipo)) return "Consultar disponibilidad de equipo";
+  if (/^Por confirmar/.test(equipo)) return "Consultar disponibilidad de equipo";
+  if (/^No aplica — servicio de asesoría/.test(equipo)) return "No requiere equipo especializado (servicio de asesoría)";
+  return equipo; // real equipment names are fine to show externally
+}
+
+function publicPrecio(precio){
+  if (!precio) return null; // caller decides fallback text
+  return precio;
+}
 
 function buildChips(){
   const temaWrap = document.getElementById("temaChips");
@@ -452,7 +600,7 @@ function buildChips(){
     chip.className = "chip";
     chip.dataset.value = lab;
     chip.innerHTML = `<span class="dot" style="background:${LAB_COLOR[lab] || '#999'}"></span>${lab}`;
-    chip.addEventListener("click", () => toggle(state.lab, lab, chip));
+    chip.addEventListener("click", () => { toggle(state.lab, lab, chip); buildAreaChips(); render(); });
     labWrap.appendChild(chip);
   });
 
@@ -465,6 +613,39 @@ function buildChips(){
     chip.addEventListener("click", () => toggle(state.prog, code, chip));
     progWrap.appendChild(chip);
   });
+
+  const dispWrap = document.getElementById("dispChips");
+  DISPONIBILIDAD.forEach(d => {
+    const chip = document.createElement("button");
+    chip.className = "chip";
+    chip.dataset.value = d;
+    chip.innerHTML = `<span class="dot" style="background:${DISP_COLOR[d] || '#999'}"></span>${d}`;
+    chip.addEventListener("click", () => toggle(state.disp, d, chip));
+    dispWrap.appendChild(chip);
+  });
+
+  buildAreaChips();
+}
+
+function areasFor(labSet){
+  const relevant = labSet.size ? SERVICIOS.filter(s => labSet.has(s.laboratorio)) : SERVICIOS;
+  return [...new Set(relevant.map(s => s.area))].sort((a, b) => a.localeCompare(b, "es"));
+}
+
+function buildAreaChips(){
+  const wrap = document.getElementById("areaChips");
+  wrap.innerHTML = "";
+  const areas = areasFor(state.lab);
+  // drop areas no longer valid under the current lab selection
+  [...state.area].forEach(a => { if (!areas.includes(a)) state.area.delete(a); });
+  areas.forEach(area => {
+    const chip = document.createElement("button");
+    chip.className = "chip" + (state.area.has(area) ? " active" : "");
+    chip.dataset.value = area;
+    chip.textContent = area;
+    chip.addEventListener("click", () => toggle(state.area, area, chip));
+    wrap.appendChild(chip);
+  });
 }
 
 function toggle(set, value, chipEl){
@@ -476,7 +657,9 @@ function toggle(set, value, chipEl){
 function matches(item){
   if(state.tema.size && !state.tema.has(item.tema)) return false;
   if(state.lab.size && !state.lab.has(item.laboratorio)) return false;
+  if(state.area.size && !state.area.has(item.area)) return false;
   if(state.prog.size && !item.programas.some(p => state.prog.has(p))) return false;
+  if(state.disp.size && !state.disp.has(item.disponibilidad)) return false;
   if(state.q){
     const hay = (item.nombre + " " + item.entidad + " " + (item.fuente||"")).toLowerCase();
     if(!hay.includes(state.q)) return false;
@@ -484,23 +667,51 @@ function matches(item){
   return true;
 }
 
+function precioHTML(item, isExternal){
+  const p = item.precio;
+  if (p === null){
+    return isExternal
+      ? `<div class="precio">Consultar cotización</div>`
+      : `<div class="precio na">Precio a definir con el profesor responsable</div>`;
+  }
+  if (typeof p === "string"){
+    return `<div class="precio">${p}</div>`;
+  }
+  // dual pricing object { interna, externa, nota? }
+  const notaHTML = p.nota ? `<div class="precio-nota">${p.nota}</div>` : "";
+  if (isExternal){
+    return `<div class="precio">${p.externa}</div>${notaHTML}`;
+  }
+  return `<div class="precio">Interna: ${p.interna} &nbsp;·&nbsp; Externa: ${p.externa}</div>${notaHTML}`;
+}
+
 function cardHTML(item){
   const meta = TEMAS[item.tema];
+  const isExternal = state.mode === "external";
   const progTags = item.programas.map(p => `<span class="tag">${PROGRAMAS[p]}</span>`).join("");
-  const precioHTML = item.precio
-    ? `<div class="precio">${item.precio}</div>`
-    : `<div class="precio na">Precio a definir con el profesor responsable</div>`;
+
+  const dispLabel = isExternal ? (DISP_PUBLIC[item.disponibilidad] || item.disponibilidad) : item.disponibilidad;
+  const dispColor = DISP_COLOR[item.disponibilidad] || "#999";
+
+  const estadoLabel = isExternal ? publicEstado(item.estado) : item.estado;
+  const estadoTag = estadoLabel ? `<span class="tag estado">${estadoLabel}</span>` : "";
+
+  const equipoLabel = isExternal ? publicEquipo(item.equipo) : item.equipo;
+
   return `
     <div class="card" style="--card-color:${meta.color}">
       <div class="tema-label">${item.tema} · ${meta.label}</div>
       <h3>${item.nombre}</h3>
       <div class="entidad"><b>Entidad objetivo:</b> ${item.entidad}</div>
+      <div class="equipo"><b>Equipo:</b> ${equipoLabel}</div>
       <div class="meta-row">
+        <span class="tag disp" style="background:${dispColor}22;color:${dispColor}">${dispLabel}</span>
         <span class="tag lab">${item.laboratorio}</span>
+        <span class="tag area">${item.area}</span>
         ${progTags}
-        <span class="tag estado">${item.estado}</span>
+        ${estadoTag}
       </div>
-      ${precioHTML}
+      ${precioHTML(item, isExternal)}
       <div class="fuente">Fuente: ${item.fuente}</div>
     </div>
   `;
@@ -526,11 +737,23 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
 });
 
 document.getElementById("clearBtn").addEventListener("click", () => {
-  state.tema.clear(); state.lab.clear(); state.prog.clear(); state.q = "";
+  state.tema.clear(); state.lab.clear(); state.area.clear(); state.prog.clear(); state.disp.clear(); state.q = "";
   document.getElementById("searchInput").value = "";
   document.querySelectorAll(".chip.active").forEach(c => c.classList.remove("active"));
+  buildAreaChips();
   render();
 });
+
+function setMode(mode){
+  state.mode = mode;
+  document.body.classList.toggle("external-mode", mode === "external");
+  document.querySelectorAll(".view-btn").forEach(b => b.classList.toggle("active", b.dataset.mode === mode));
+  render();
+}
+document.querySelectorAll(".view-btn").forEach(b => {
+  b.addEventListener("click", () => setMode(b.dataset.mode));
+});
+document.getElementById("backToInternal").addEventListener("click", () => setMode("internal"));
 
 buildChips();
 render();
