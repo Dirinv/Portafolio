@@ -67,6 +67,26 @@
     max-width:640px;
     font-size:15px;
   }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    gap:20px;
+  }
+  .crest{
+    flex-shrink:0;
+    width:64px;
+    height:64px;
+    background:#fff;
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px;
+  }
+  .crest img{
+    max-width:100%;
+    max-height:100%;
+  }
 
   /* ---------- toolbar ---------- */
   .toolbar{
@@ -153,8 +173,47 @@
   .filter-groups{
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:8px;
+    margin-top:14px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
   }
+  #filterPanel[hidden]{ display:none; }
+  .filters-toggle-btn{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    background:#fff;
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:9px 14px;
+    border-radius:2px;
+    font-size:13px;
+    cursor:pointer;
+  }
+  .filters-toggle-btn:hover{ border-color:var(--purple); }
+  .filters-toggle-btn.open{ border-color:var(--purple); color:var(--purple-dark); }
+  .filter-count-badge{
+    background:var(--purple);
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+    padding:1px 6px;
+    border-radius:10px;
+  }
+  .chevron{ font-size:11px; transition:transform .15s ease; }
+  .filters-toggle-btn.open .chevron{ transform:rotate(180deg); }
+  .ext-toggle{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:12.5px;
+    color:var(--text-grey);
+    cursor:pointer;
+    user-select:none;
+    white-space:nowrap;
+  }
+  .ext-toggle input{ cursor:pointer; }
   .filter-group{
     display:flex;
     gap:8px;
@@ -177,9 +236,9 @@
     border:1px solid var(--line);
     background:#fff;
     color:var(--ink);
-    padding:6px 12px;
+    padding:5px 10px;
     border-radius:2px;
-    font-size:13px;
+    font-size:12.5px;
     cursor:pointer;
     user-select:none;
     transition:background .12s ease, color .12s ease, border-color .12s ease;
@@ -210,20 +269,35 @@
     border:1px solid var(--line);
     border-top:3px solid var(--card-color, var(--purple));
     border-radius:2px;
-    padding:16px 18px;
+    padding:14px 16px;
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:6px;
   }
   .card .tema-label{
-    font-size:11.5px;
+    font-size:11px;
     color:var(--card-color, var(--purple));
     font-weight:600;
   }
   .card h3{
-    font-size:16px;
+    font-size:15px;
     line-height:1.3;
     color:var(--ink);
+  }
+  .card .entidad{
+    font-size:12.5px;
+    color:var(--text-grey);
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+  .card .entidad b{ color:var(--ink); font-weight:600; }
+  .card .compact-row{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
   }
   .card .meta-row{
     display:flex;
@@ -241,11 +315,6 @@
   .tag.lab{ background:#E4EAF0; color:#2E4A63; }
   .tag.area{ background:#EFECE3; color:#5C5346; }
   .tag.estado{ background:#EFEFEF; color:#4A4A4A; }
-  .card .entidad{
-    font-size:13px;
-    color:var(--text-grey);
-  }
-  .card .entidad b{ color:var(--ink); font-weight:600; }
   .card .equipo{
     font-size:12.5px;
     color:var(--text-grey);
@@ -258,9 +327,6 @@
     font-size:14px;
     font-weight:700;
     color:var(--purple-dark);
-    margin-top:auto;
-    padding-top:6px;
-    border-top:1px dashed var(--line);
   }
   .card .precio.na{
     color:var(--text-grey);
@@ -272,12 +338,33 @@
     font-size:11px;
     color:var(--text-grey);
     font-style:italic;
-    margin-top:-4px;
+    margin-top:-2px;
   }
   .card .fuente{
     font-size:11px;
     color:#A5A5A2;
   }
+  .details-toggle{
+    align-self:flex-start;
+    background:none;
+    border:none;
+    color:var(--purple-dark);
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    padding:2px 0;
+    margin-top:2px;
+  }
+  .details-toggle:hover{ text-decoration:underline; }
+  .details-panel{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    padding-top:8px;
+    margin-top:2px;
+    border-top:1px dashed var(--line);
+  }
+  .details-panel[hidden]{ display:none; }
 
   .empty{
     padding:60px 20px;
@@ -295,6 +382,7 @@
 
   @media (max-width:640px){
     header{padding:24px 18px 22px;}
+    .header-inner{ flex-direction:column; align-items:flex-start; gap:12px; }
     .toolbar{padding:14px 18px;}
     main{padding:20px 18px 40px;}
     .filter-group .glabel{min-width:100%;padding-top:0;}
@@ -304,15 +392,25 @@
 <body>
 
 <header>
-  <p class="eyebrow">Universidad Nacional de Colombia — Sede de La Paz</p>
-  <h1>Portafolio de Servicios</h1>
-  <p class="sub">Catálogo consolidado de servicios ofertables: laboratorios, consultoría, interventoría y más — filtrable por tema, laboratorio y programa académico.</p>
+  <div class="header-inner">
+    <div class="crest"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Escudo_de_la_Universidad_Nacional_de_Colombia_(2016).svg" alt="Escudo Universidad Nacional de Colombia"></div>
+    <div class="header-text">
+      <p class="eyebrow">Universidad Nacional de Colombia — Sede de La Paz</p>
+      <h1>Portafolio de Servicios</h1>
+      <p class="sub">Catálogo consolidado de servicios ofertables: laboratorios, consultoría, interventoría y más — filtrable por tema, laboratorio y programa académico.</p>
+    </div>
+  </div>
 </header>
 
 <div class="toolbar">
   <div class="external-banner">Vista externa activa — apta para compartir con entidades externas. Los términos internos (calibración, confirmación de capacidad, etc.) están ocultos. <button id="backToInternal" style="border:none;background:none;color:#5A2E75;text-decoration:underline;cursor:pointer;font-size:12.5px;padding:0;margin-left:6px;">Volver a vista interna</button></div>
   <div class="search-row">
     <input type="text" id="searchInput" placeholder="Buscar por nombre, entidad o palabra clave…">
+    <button class="filters-toggle-btn" id="filtersToggleBtn">Filtros <span class="filter-count-badge" id="filterCountBadge" hidden>0</span> <span class="chevron" id="filtersChevron">▾</span></button>
+    <label class="ext-toggle">
+      <input type="checkbox" id="includeExternalRef">
+      Incluir servicios de otras sedes (referencia)
+    </label>
     <span class="count"><strong id="countNum">0</strong> servicios</span>
     <div class="view-toggle" id="viewToggle">
       <button class="view-btn active" data-mode="internal">Vista interna</button>
@@ -320,7 +418,7 @@
     </div>
     <button class="clear-btn" id="clearBtn">Limpiar filtros</button>
   </div>
-  <div class="filter-groups">
+  <div class="filter-groups" id="filterPanel" hidden>
     <div class="filter-group">
       <span class="glabel">Tema</span>
       <div class="chips" id="temaChips"></div>
@@ -408,9 +506,9 @@ const LABS = [
   "Análisis y Visualización de Datos",
   "Física y Prototipado",
   "Comunicación Audiovisual",
-  "Sin laboratorio requerido",
-  "Fuera de la Sede de La Paz (referencia)"
+  "Sin laboratorio requerido"
 ];
+const LAB_EXTERNAL_REF = "Fuera de la Sede de La Paz (referencia)";
 
 const DISPONIBILIDAD = ["Disponible en sede", "Apoyo con otra sede", "Proyectado en esta sede"];
 
@@ -535,8 +633,11 @@ const SERVICIOS = [
   { tema: "PS-05", nombre: "Servicios del laboratorio — por definir", entidad: "Por definir según líneas de servicio futuras", programas: ["EST"], laboratorio: "Análisis y Visualización de Datos", area: "Por definir", equipo: "Por confirmar con el responsable del laboratorio", precio: null, estado: "Laboratorio en caracterización — aún sin inventario de equipos ni servicios definidos", disponibilidad: "Proyectado en esta sede", fuente: "Listado oficial de laboratorios de la Sede de La Paz" },
 ];
 
+// ---- assign stable ids ----
+SERVICIOS.forEach((s, i) => { s.__id = i; });
+
 // ---- state ----
-const state = { tema: new Set(), lab: new Set(), area: new Set(), prog: new Set(), disp: new Set(), q: "", mode: "internal" };
+const state = { tema: new Set(), lab: new Set(), area: new Set(), prog: new Set(), disp: new Set(), q: "", mode: "internal", expanded: new Set(), includeExternalRef: false };
 
 const LAB_COLOR = {
   "Propiedades Biológicas y Químicas": "#34495E",
@@ -655,6 +756,7 @@ function toggle(set, value, chipEl){
 }
 
 function matches(item){
+  if(!state.includeExternalRef && item.laboratorio === LAB_EXTERNAL_REF) return false;
   if(state.tema.size && !state.tema.has(item.tema)) return false;
   if(state.lab.size && !state.lab.has(item.laboratorio)) return false;
   if(state.area.size && !state.area.has(item.area)) return false;
@@ -698,21 +800,29 @@ function cardHTML(item){
 
   const equipoLabel = isExternal ? publicEquipo(item.equipo) : item.equipo;
 
+  const isOpen = state.expanded.has(item.__id);
+  const entidadHTML = isExternal ? "" : `<div class="entidad"><b>Entidad objetivo:</b> ${item.entidad}</div>`;
+
   return `
     <div class="card" style="--card-color:${meta.color}">
       <div class="tema-label">${item.tema} · ${meta.label}</div>
       <h3>${item.nombre}</h3>
-      <div class="entidad"><b>Entidad objetivo:</b> ${item.entidad}</div>
-      <div class="equipo"><b>Equipo:</b> ${equipoLabel}</div>
-      <div class="meta-row">
+      ${entidadHTML}
+      <div class="compact-row">
         <span class="tag disp" style="background:${dispColor}22;color:${dispColor}">${dispLabel}</span>
-        <span class="tag lab">${item.laboratorio}</span>
-        <span class="tag area">${item.area}</span>
-        ${progTags}
-        ${estadoTag}
       </div>
       ${precioHTML(item, isExternal)}
-      <div class="fuente">Fuente: ${item.fuente}</div>
+      <button class="details-toggle" data-id="${item.__id}">${isOpen ? "Ocultar detalles ▴" : "Ver detalles ▾"}</button>
+      <div class="details-panel" ${isOpen ? "" : "hidden"}>
+        <div class="equipo"><b>Equipo:</b> ${equipoLabel}</div>
+        <div class="meta-row">
+          <span class="tag lab">${item.laboratorio}</span>
+          <span class="tag area">${item.area}</span>
+          ${progTags}
+          ${estadoTag}
+        </div>
+        <div class="fuente">Fuente: ${item.fuente}</div>
+      </div>
     </div>
   `;
 }
@@ -729,7 +839,38 @@ function render(){
     empty.style.display = "none";
     grid.innerHTML = filtered.map(cardHTML).join("");
   }
+  updateFilterCountBadge();
 }
+
+function updateFilterCountBadge(){
+  const n = state.tema.size + state.lab.size + state.area.size + state.prog.size + state.disp.size;
+  const badge = document.getElementById("filterCountBadge");
+  if(n > 0){
+    badge.textContent = n;
+    badge.hidden = false;
+  } else {
+    badge.hidden = true;
+  }
+}
+
+// ---- filters panel toggle ----
+const filtersToggleBtn = document.getElementById("filtersToggleBtn");
+const filterPanel = document.getElementById("filterPanel");
+filtersToggleBtn.addEventListener("click", () => {
+  const willOpen = filterPanel.hidden;
+  filterPanel.hidden = !willOpen;
+  filtersToggleBtn.classList.toggle("open", willOpen);
+});
+
+// ---- details expand/collapse (event delegation) ----
+document.getElementById("grid").addEventListener("click", (e) => {
+  const btn = e.target.closest(".details-toggle");
+  if(!btn) return;
+  const id = Number(btn.dataset.id);
+  if(state.expanded.has(id)) state.expanded.delete(id);
+  else state.expanded.add(id);
+  render();
+});
 
 document.getElementById("searchInput").addEventListener("input", (e) => {
   state.q = e.target.value.trim().toLowerCase();
@@ -754,6 +895,11 @@ document.querySelectorAll(".view-btn").forEach(b => {
   b.addEventListener("click", () => setMode(b.dataset.mode));
 });
 document.getElementById("backToInternal").addEventListener("click", () => setMode("internal"));
+
+document.getElementById("includeExternalRef").addEventListener("change", (e) => {
+  state.includeExternalRef = e.target.checked;
+  render();
+});
 
 buildChips();
 render();
