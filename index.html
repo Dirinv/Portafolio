@@ -805,7 +805,6 @@ function cardHTML(item){
       <div class="tema-label">${item.tema} · ${meta.label}</div>
       <h3>${item.nombre}</h3>
       ${entidadHTML}
-      <div class="compact-row">
       ${precioHTML(item, isExternal)}
       <button class="details-toggle" data-id="${item.__id}">${isOpen ? "Ocultar detalles ▴" : "Ver detalles ▾"}</button>
       <div class="details-panel" ${isOpen ? "" : "hidden"}>
