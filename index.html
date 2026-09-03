@@ -806,13 +806,12 @@ function cardHTML(item){
       <h3>${item.nombre}</h3>
       ${entidadHTML}
       <div class="compact-row">
-        <span class="tag disp" style="background:${dispColor}22;color:${dispColor}">${dispLabel}</span>
-      </div>
       ${precioHTML(item, isExternal)}
       <button class="details-toggle" data-id="${item.__id}">${isOpen ? "Ocultar detalles ▴" : "Ver detalles ▾"}</button>
       <div class="details-panel" ${isOpen ? "" : "hidden"}>
         <div class="equipo"><b>Equipo:</b> ${equipoLabel}</div>
         <div class="meta-row">
+          <span class="tag disp" style="background:${dispColor}22;color:${dispColor}">${dispLabel}</span>
           <span class="tag lab">${item.laboratorio}</span>
           <span class="tag area">${item.area}</span>
           ${progTags}
